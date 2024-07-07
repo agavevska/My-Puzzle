@@ -62,6 +62,7 @@ namespace PuzzleGame
 * `snapThreshold` - константа која дефинира колку блиску треба да биде некое парче за да се закачи на своето место.
 
 
+
 `4. Опис на решението`
 
 `4.1 Генерирање сложувалка`
@@ -70,9 +71,7 @@ namespace PuzzleGame
 
 `Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat)` 
 
-Oваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). 
-
-На крај креираме нов `PictureBox` `pb` за прикажување на сликата на парчето сложувалка. 
+Oваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). На крај креираме нов `PictureBox` `pb` за прикажување на сликата на парчето сложувалка. 
 
 ```
 private void GeneratePuzzle()
@@ -115,6 +114,7 @@ private void GeneratePuzzle()
     pnlPuzzleBoard.Invalidate();
 }
 ```
+
 
 `4.2 Користење помош`
 
