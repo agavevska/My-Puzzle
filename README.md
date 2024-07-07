@@ -33,13 +33,42 @@ My Puzzle е апликација која има 3 нивоа:
 
 ![image](https://github.com/agavevska/My-Puzzle/assets/138719425/6cfb03c0-4537-4953-aee2-1b9ea596e07f)
 
-`3. Опис на решение на проблемот`
+`3. Опис на структурата`
 
-`3.1 Генерирање сложувалка`
+```
+namespace PuzzleGame
+{
+    public partial class Form1 : Form
+    {
+        private int puzzleSize;
+        private Image originalImage;
+        private PictureBox[] puzzlePieces;
+        private Point[] originalLocations;
+        private int piecesPerRow;
+        private int pieceWidth;
+        private int pieceHeight;
+        private const int snapThreshold = 15;
+        private DateTime startTime;
+        private Timer timer;
+        private int remainingHints = 3;
+    }
+}
+```
+
+* `originalImage` - променлива за чување на оригиналната слика која се користи за креирање на парчиња за сложувалката.
+* `puzzlePieces` - низа од `PictureBox` контроли кои ги претставуваат парчињата од сложувалката на формата.
+* `originalLocations` - низа од `Point` структури кои ги чуваат оригиналните локации (координати) на парчињата.
+* `snapThreshold` - константа која дефинира колку блиску треба да биде некое парче за да се закачи на своето место.
+
+`4. Опис на решението`
+
+`4.1 Генерирање сложувалка`
 
 Функцијата `GeneratePuzzle()` има за цел да генерира и прикаже парчиња од сложувалката со соодветни контроли. `puzzlePieces = new PictureBox[puzzleSize]` парчињата сложувалка ги чуваме во нов `PictureBox` каде всушност тие претставуваат слика која подоцна се дели на парчиња. Создаваме нова инстанца од класата `Bitmap` `bm` која ја користи изворната слика `originalImage`. 
 
-`Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat)` - оваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). 
+`Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat)` 
+
+Oваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). 
 
 На крај креираме нов `PictureBox` `pb` за прикажување на сликата на парчето сложувалка. 
 
