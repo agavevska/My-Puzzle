@@ -43,7 +43,7 @@ My Puzzle е апликација која има 3 нивоа:
 
 На крај креираме нов `PictureBox` `pb` за прикажување на сликата на парчето сложувалка. 
 
-`
+```
 private void GeneratePuzzle()
 {
     pnlPuzzleBoard.Controls.Clear();
@@ -83,7 +83,7 @@ private void GeneratePuzzle()
     ShufflePuzzle();
     pnlPuzzleBoard.Invalidate();
 }
-`
+```
 
 
 
