@@ -33,6 +33,58 @@ My Puzzle е апликација која има 3 нивоа:
 
 ![image](https://github.com/agavevska/My-Puzzle/assets/138719425/6cfb03c0-4537-4953-aee2-1b9ea596e07f)
 
+`3. Опис на решение на проблемот`
+
+`3.1 Генерирање сложувалка`
+
+Функцијата `GeneratePuzzle()` има за цел да генерира и прикаже парчиња од сложувалката со соодветни контроли. `puzzlePieces = new PictureBox[puzzleSize]` парчињата сложувалка ги чуваме во нов `PictureBox` каде всушност тие претставуваат слика која подоцна се дели на парчиња. Создаваме нова инстанца од класата `Bitmap` `(bm)` која ја користи изворната слика `originalImage`. 
+
+`Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat)` - оваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). 
+
+На крај креираме нов `PictureBox` `(pb)` за прикажување на сликата на парчето сложувалка. 
+
+`private void GeneratePuzzle()
+{
+    pnlPuzzleBoard.Controls.Clear();
+    pnlPieceHolder.Controls.Clear();
+    piecesPerRow = (int)Math.Sqrt(puzzleSize);
+    pieceWidth = pnlPuzzleBoard.Width / piecesPerRow;
+    pieceHeight = pnlPuzzleBoard.Height / piecesPerRow;
+    puzzlePieces = new PictureBox[puzzleSize];
+    originalLocations = new Point[puzzleSize];
+
+    Bitmap bm = new Bitmap(originalImage, pnlPuzzleBoard.Size);
+    for (int i = 0; i < puzzleSize; i++)
+    {
+        int row = i / piecesPerRow;
+        int col = i % piecesPerRow;
+
+        Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat);
+        PictureBox pb = new PictureBox
+        {
+            Width = pieceWidth,
+            Height = pieceHeight,
+            Image = pieceImage,
+            BorderStyle = BorderStyle.FixedSingle,
+            Location = new Point(col * pieceWidth, row * pieceHeight),
+            Tag = i
+        };
+
+        pb.MouseDown += PuzzlePiece_MouseDown;
+        pb.MouseMove += PuzzlePiece_MouseMove;
+        pb.MouseUp += PuzzlePiece_MouseUp;
+
+        puzzlePieces[i] = pb;
+        originalLocations[i] = pb.Location;
+        pnlPieceHolder.Controls.Add(pb);
+    }
+
+    ShufflePuzzle();
+    pnlPuzzleBoard.Invalidate();
+}`
+
+
+
 
 
 
