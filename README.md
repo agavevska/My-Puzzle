@@ -29,7 +29,7 @@ My Puzzle е апликација која има 3 нивоа:
 
 ![image](https://github.com/agavevska/My-Puzzle/assets/138719425/843c7d7d-e791-401a-a762-a0f2194158dd)
 
-Easy&nbsp;&nbsp;&nbsp;Medium Hard
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Easy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medium&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hard
 
 
 
