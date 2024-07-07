@@ -37,13 +37,14 @@ My Puzzle е апликација која има 3 нивоа:
 
 `3.1 Генерирање сложувалка`
 
-Функцијата `GeneratePuzzle()` има за цел да генерира и прикаже парчиња од сложувалката со соодветни контроли. `puzzlePieces = new PictureBox[puzzleSize]` парчињата сложувалка ги чуваме во нов `PictureBox` каде всушност тие претставуваат слика која подоцна се дели на парчиња. Создаваме нова инстанца од класата `Bitmap` `(bm)` која ја користи изворната слика `originalImage`. 
+Функцијата `GeneratePuzzle()` има за цел да генерира и прикаже парчиња од сложувалката со соодветни контроли. `puzzlePieces = new PictureBox[puzzleSize]` парчињата сложувалка ги чуваме во нов `PictureBox` каде всушност тие претставуваат слика која подоцна се дели на парчиња. Создаваме нова инстанца од класата `Bitmap` `bm` која ја користи изворната слика `originalImage`. 
 
 `Bitmap pieceImage = bm.Clone(new Rectangle(col * pieceWidth, row * pieceHeight, pieceWidth, pieceHeight), bm.PixelFormat)` - оваа линија код креира нов `Bitmap` објект `pieceImage` користејќи методот `Clone()` на постоечкиот `Bitmap објект` `bm` (кој претставува изворна слика). 
 
-На крај креираме нов `PictureBox` `(pb)` за прикажување на сликата на парчето сложувалка. 
+На крај креираме нов `PictureBox` `pb` за прикажување на сликата на парчето сложувалка. 
 
-`private void GeneratePuzzle()
+`
+private void GeneratePuzzle()
 {
     pnlPuzzleBoard.Controls.Clear();
     pnlPieceHolder.Controls.Clear();
@@ -81,7 +82,8 @@ My Puzzle е апликација која има 3 нивоа:
 
     ShufflePuzzle();
     pnlPuzzleBoard.Invalidate();
-}`
+}
+`
 
 
 
