@@ -55,10 +55,12 @@ namespace PuzzleGame
 }
 ```
 
+
 * `originalImage` - променлива за чување на оригиналната слика која се користи за креирање на парчиња за сложувалката.
 * `puzzlePieces` - низа од `PictureBox` контроли кои ги претставуваат парчињата од сложувалката на формата.
 * `originalLocations` - низа од `Point` структури кои ги чуваат оригиналните локации (координати) на парчињата.
 * `snapThreshold` - константа која дефинира колку блиску треба да биде некое парче за да се закачи на своето место.
+
 
 `4. Опис на решението`
 
@@ -111,6 +113,61 @@ private void GeneratePuzzle()
 
     ShufflePuzzle();
     pnlPuzzleBoard.Invalidate();
+}
+```
+
+`4.2 Користење помош`
+
+Функцијата `BtnHint_Click()` има за цел да му помогне на корисникот за комплетирање на сложувалката. Се наоѓаат сите парчиња (`PictureBox`) кои не се на нивните точни позиции. Ова се прави со споредба на нивната локација, со точната локација од `originalsLocations` за соодветниот индекс.
+
+Ако постојат неправилно поставени парчиња, по случаен избор се избира едно и се поставува на неговата точна локација на `pnlPuzzleBoard`. Со ова се намалува бројот за користење на помош.
+
+```
+private void BtnHint_Click(object sender, EventArgs e)
+{
+    if (remainingHints > 0)
+    {
+        var incorrectPieces = puzzlePieces.Where(pb =>
+        {
+            int index = (int)pb.Tag;
+            Point correctLocation = originalLocations[index];
+            return pb.Parent != pnlPuzzleBoard || pb.Left != correctLocation.X || pb.Top != correctLocation.Y;
+        }).ToList();
+
+        if (incorrectPieces.Count > 0)
+        {
+            Random rand = new Random();
+            PictureBox pb = incorrectPieces[rand.Next(incorrectPieces.Count)];
+
+            int index = (int)pb.Tag;
+            Point correctLocation = originalLocations[index];
+
+            pb.Parent = pnlPuzzleBoard;
+            pb.Location = new Point(correctLocation.X, correctLocation.Y);
+
+            pb.MouseDown -= PuzzlePiece_MouseDown;
+            pb.MouseMove -= PuzzlePiece_MouseMove;
+            pb.MouseUp -= PuzzlePiece_MouseUp;
+
+            remainingHints--;
+
+            btnHint.Text = $"Hint: {remainingHints}";
+
+            if (IsPuzzleSolved())
+            {
+                timer.Stop();
+                ShowCompletionMessage(DateTime.Now - startTime);
+            }
+        }
+        else
+        {
+            MessageBox.Show("All pieces are already in their correct positions.");
+        }
+    }
+    else
+    {
+        MessageBox.Show("No more hints available.");
+    }
 }
 ```
 
