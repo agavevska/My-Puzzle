@@ -62,7 +62,6 @@ namespace PuzzleGame
 * `snapThreshold` - константа која дефинира колку блиску треба да биде некое парче за да се закачи на своето место.
 
 
-
 `4. Опис на решението`
 
 `4.1 Генерирање сложувалка`
@@ -171,6 +170,29 @@ private void BtnHint_Click(object sender, EventArgs e)
 }
 ```
 
+
+`4.3 Прикачување своја фотографија`
+
+Методот `BtnUpload_Click()` е поврзан со кликнување на копчето `btnUpload` за прикачување на фотографија. Се отвора нов прозорец за избор на датотека `OpenFileDialog()`. `Filter` својството ограничува кои видови на датотеки може да се отворат.
+
+Сликата од датотеката која е избрана се чита во променливата `originalImage` со помош на методот `Image.FromFile.` Потоа, сликата се поставува како слика на `PictureBox`,контролата pbUploadedImage на формата, што овозможува корисникот да ја види избраната слика на екранот.
+
+```
+private void BtnUpload_Click(object sender, EventArgs e)
+{
+    using (OpenFileDialog ofd = new OpenFileDialog())
+    {
+        ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+            originalImage = Image.FromFile(ofd.FileName);
+            pbUploadedImage.Image = originalImage;
+            GeneratePuzzle();
+            btnStart.Enabled = true;
+        }
+    }
+}
+```
 
 
 
